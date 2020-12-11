@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Shop_Phong_Start" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="Shop_Phong_StartEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Loai_San_Pham" EntityType="Shop_Phong_Start.Loai_San_Pham" />
+    <EntitySet Name="San_Pham" EntityType="Shop_Phong_Start.San_Pham" />
+    <EntitySet Name="ThongTinKhachHangs" EntityType="Shop_Phong_Start.ThongTinKhachHang" />
+    <AssociationSet Name="key1" Association="Shop_Phong_Start.key1">
+      <End Role="Loai_San_Pham" EntitySet="Loai_San_Pham" />
+      <End Role="San_Pham" EntitySet="San_Pham" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Loai_San_Pham">
+    <Key>
+      <PropertyRef Name="ID_Loai_San_Pham" />
+    </Key>
+    <Property Name="ID_Loai_San_Pham" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Ten_Loai_San_Pham" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="San_Pham" Relationship="Shop_Phong_Start.key1" FromRole="Loai_San_Pham" ToRole="San_Pham" />
+  </EntityType>
+  <EntityType Name="San_Pham">
+    <Key>
+      <PropertyRef Name="Ma_San_Pham" />
+    </Key>
+    <Property Name="Ma_San_Pham" Type="Int32" Nullable="false" />
+    <Property Name="ID_Loai_San_Pham" Type="Int32" />
+    <Property Name="Ten_San_Pham" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Hinh_Anh" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="Thong_Tin_San_Pham" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+    <Property Name="Gia_tien" Type="Double" />
+    <NavigationProperty Name="Loai_San_Pham" Relationship="Shop_Phong_Start.key1" FromRole="San_Pham" ToRole="Loai_San_Pham" />
+  </EntityType>
+  <EntityType Name="ThongTinKhachHang">
+    <Key>
+      <PropertyRef Name="Ma_Khach_Hang" />
+    </Key>
+    <Property Name="Ma_Khach_Hang" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Ten_Khanh_Hang" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Email" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Phone" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="Password" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Adress" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <Association Name="key1">
+    <End Role="Loai_San_Pham" Type="Shop_Phong_Start.Loai_San_Pham" Multiplicity="0..1" />
+    <End Role="San_Pham" Type="Shop_Phong_Start.San_Pham" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Loai_San_Pham">
+        <PropertyRef Name="ID_Loai_San_Pham" />
+      </Principal>
+      <Dependent Role="San_Pham">
+        <PropertyRef Name="ID_Loai_San_Pham" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,247 @@
+﻿<!Doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/redmond/jquery-ui.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery-ui.js"></script>
+    <style>
+        #img_cart {
+            position: relative;
+            margin-left: 100px;
+        }
+    </style>
+</head>
+
+<body>
+   
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <i><h1 style="color: coral; font-weight: bold; margin-top: 50px">Phong Star</h1></i>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#div_collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="div_collapse">
+                <ul class="nav navbar-nav navbar-left" style="font-weight: bold; font-size: 18px;">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Thời trang nam <span class="caret"></span>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Áo thun <span class="fas fa-tshirt"
+                                            style="color: aqua; margin-left:10px ;"></span></a></li>
+                                <li><a href="#">Áo sơ mi <span class="fas fa-tshirt"
+                                            style="color: brown; margin-left:10px ;"></span></a></li>
+                                <li><a href="#">Quần dài,quần jean</a></li>
+                                <li><a href="#">Quần short</a></li>
+                            </ul>
+                        </a>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Thời trang nữ <span class="caret"></span>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Áo biker <span class="fas fa-tshirt"
+                                            style="color: aqua; margin-left:10px ;"></span></a></li>
+                                <li><a href="#">Áo sheer <span class="fas fa-tshirt"
+                                            style="color:brown; margin-left:10px ;"></span></a></li>
+                                <li><a href="#">Đầm, Váy </a></li>
+                                <li><a href="#">Quần lửng bó</a></li>
+                                <li><a href="#">Quần jogger</a></li>
+                            </ul>
+                        </a>
+                    </li>
+                    <li><a href="#">Trang Sức</a></li>
+                    <li><a href="#">Giầy-Balo-túi sách</a></li>
+
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#" ><span class="glyphicon glyphicon-exclamation-sign"></span> Thông báo</a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-question-sign"></span> Trợ giúp</a></li>
+                    <li><a href="#"  id="ic_dangki"><span class="glyphicon glyphicon-log-in"></span> Đăng kí</a></li>
+                    <li><a href="#" id="ic_dangnhap"><span class="glyphicon glyphicon-user"></span> Đăng nhập</a></li>
+                    </br>
+                    <a href="javascript:GioHang('')">
+                        <img src="~/HinhAnh/shopping.png" class="img-rounded" id="img_cart">
+                    </a>
+                </ul>
+                </br>
+                </br>
+                <form class="navbar-form pull-right" style="font-size: large;">
+                    <input type="text" style="width: 500px; " placeholder="Tìm kiếm sản phẩm">
+                    <button type="submit" class="btn btn-danger" style="width: 80px;" onclick:"TiemKiem()"><span
+                            class="glyphicon glyphicon-search"></span></button>
+
+
+                </form>
+            </div>
+        </div>
+    </nav>
+    <div id="body">
+        @RenderSection("featured", required: false)
+        <section class="content-wrapper main-content clear-fix">
+            @RenderBody()
+        </section>
+    </div>
+        <div id="FormDangKi" title="Đăng kí thành viên" style="display: none;">
+        <p style="text-align: center; font-size: 20px;">Bạn phải điền vào form đăng kí</p>
+        <form>
+            <fieldset>
+                <div>
+                    <label  for="name_kh">Tên khách hàng:</label>
+                    <input type="text" id="name_kh" style="margin-left: 30px; width: 220px; text-align: center;" placeholder="Name">
+                </div>
+                <br>
+                <div>
+                    <label  for="email_kh">Email:</label>
+                    
+                    <input  type="text" id="email_kh"  style="margin-left: 80px; width: 280px; text-align: center;" placeholder="Email">
+                </div>
+                <br>
+                <div>
+                    <label   for="phone">Số điện thoại: </label>
+                   
+                    <input type="text" id="phone" style="margin-left: 50px; width: 220px; text-align: center;" placeholder="Phone">
+                </div>
+                <br>
+                <div>
+                    <label  for="password">Mật khẩu: </label>
+                    
+                    <input  type="password" id="password" style="margin-left: 78px; width: 220px; text-align: center;" placeholder="Password">
+                </div>
+                <br>
+                <div>
+                    <label  for="repassword">Nhập lại mật khẩu: </label>
+                   
+                    <input  type="password" id="repassword" style="margin-left: 18px; width: 220px; text-align: center;" placeholder="Re-Password">
+                </div>
+                <br>
+                <div>
+                    <label  for="adress">Địa chỉ: </label>
+                    
+                    <input  type="text" id="adress" style="width: 350px; margin-left: 20px; text-align: center;" placeholder="Adress"> 
+                </div>
+        
+                <div>
+                    <p id="ThongBao"></p>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <div id="FormDangNhap" title="Đăng nhập" style="text-align: center; display: none;">
+        <h3 style="font-weight: bold; text-align: center;">Đăng nhập</h3>
+        <br>
+        <form>
+            <fieldset>
+                <div>
+                    <label>Email:</label>
+                    <input id="email_dn" type="text" placeholder="Email" style="width: 200px; text-align: center; margin-left: 28px;">
+                </div>
+                <br>
+                 <div>
+                    <label>Mật khẩu:</label>
+                    <input id="password_dn" type="password" placeholder="Password" style="width: 200px; text-align: center;">
+                 </div>
+                <div>
+                    <p id="thongbao_dn"></p>
+                </div>
+                 <br>
+            </fieldset>
+        </form>
+    </div>
+  
+    <div id="FormSanPham" style="display: none">
+      
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <img id="ImageSp" style="width: 250px; height: 300px;" src="https://img.zanado.com/media/catalog/product/cache/all/thumbnail/700x817/7b8fef0172c2eb72dd8fd366c999954c/4/_/ao_nu_co_sen_soc_de_thuong_54c2.jpg">
+                </div>
+                <div class="col-md-6">
+                    <h3 id="TenSanPham">Áo thun nữ tính</h3>
+                    <button type="button" class="btn btn-danger" id="sub" style="width: 50px; height: 35px; text-align: center;">-</button>
+                  
+                    
+                    <input type="text" style="text-align: center; font-weight: bold; font-size: medium; width: 80px; height: 35px" disabled="true">
+
+                    <button type="button" class="btn btn-danger" id="add" style="width: 50px; height: 35px; text-align: center;">+</button>
+                    <br />
+                    <h3 id="GiaSanPham"></h3>
+                    <br>
+                    <h5 id="ThongBaoSp" style="color:#00ff21;"></h5>
+                </div>
+            </div>
+            <div class="row">
+                <h3>Thông Tin Sản Phẩm</h3>
+                <p id="ThongTinSp"></p>
+            </div>
+        </div>
+    </div>
+    <div id="GioHang" title="Giỏ hàng" style="display: none;">
+        <div style='border: solid 2px #ff6a00; margin: 10px'>
+            <div class='row' style='height: auto;'>
+                <div class='col-md-4'>
+                    <img src='https://media3.scdn.vn/img3/2019/4_18/hUR3VM_simg_de2fe0_500x500_maxb.jpg' style='display: block; width: 120px; height: 130px; margin: 10px' />
+
+                </div>
+                <div class='col-md-8'>
+                    <h3 id='TenSpGh'>áo thun nam</h3>
+                    <h4 id='GiaSpGh'>10000 vnd</h4>
+                    <h5 id='ThongTingSpGh' style='overflow: hidden; text-overflow: ellipsis; white-space: nowrap'>Địa chỉ: 07 hà văn tính - liên chiểu - hòa khánh - đà nẵng Số điện thoại : 0363173548 . Email liên hệ: vovanphong15sk@gmail.com</h5>
+                    <button type='button' onclick ="data()" class='btn btn-warning' id='delete' style='text-align: center; float: right'><span class='glyphicon glyphicon-remove'></span>Xóa </button>
+                </div>
+            </div>
+        </div>   
+    </div>
+
+    <div id="FormThongTin" title="Thông tin giao hàng" style="display: none;">
+        <p style="text-align: center; font-size: 20px;">Bạn phải điền vào form thông tin sau</p>
+        <form>
+            <fieldset>
+                <div>
+                    <label  for="name_tt">Tên khách hàng:</label>
+                    <br>
+                    <input type="text" id="name_tt" style="width: 100%;  text-align: center;" placeholder="Name">
+                </div>
+                <br>
+                <div>
+                    <label  for="email_tt">Email:</label>
+                    <br>
+                    <input  type="text" id="email_tt"  style="width: 100%;  text-align: center;" placeholder="Email">
+                </div>
+                <br>
+                <div>
+                    <label   for="phone_tt">Số điện thoại: </label>
+                    <br>
+                    <input type="text" id="phone_tt" style="width: 100%;  text-align: center;" placeholder="Phone">
+                </div>
+                <br>
+                <div>
+                    <label  for="adress_tt">Địa chỉ giao hàng: </label>
+                    
+                    <input  type="text" id="adress_tt" style="width: 100%;  text-align: center;" placeholder="Adress"> 
+                </div>
+        
+                <div>
+                    <p id="ThongBao_tt"></p>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <footer style="text-align: center;">
+        <p>Địa chỉ: 07 hà văn tính - liên chiểu - hòa khánh - đà nẵng</p>
+        <p>Số điện thoại : 0363173548 . Email liên hệ: vovanphong15sk@gmail.com</p>
+        <p>Công ty trách nhiệm một thành viên: Phong Star</p> 
+    </footer>
+   
+</body>
+
+</html>

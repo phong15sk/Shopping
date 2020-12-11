@@ -1,0 +1,474 @@
+﻿@{
+    ViewBag.Title = "About";
+    Layout = "~/Views/Layout/Layout_for_about.cshtml";
+}
+@model List<My_Database.San_Pham>
+  <div class="container-fluid" >
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="carousel slide" id="mycarousel" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#mycarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#mycarousel" data-slide-to="1"></li>
+                        <li data-target="#mycarousel" data-slide-to="2"></li>
+                        <li data-target="#mycarousel" data-slide-to="3"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <img src="~/HinhAnh/quangcao.jpg" style="width: 1000px; height: 500px;">
+                        </div>
+                        <div class="item">
+                            <img src="~/HinhAnh/quangcao_2.png" style="width: 1000px; height: 500px;">
+                        </div>
+                        <div class="item">
+                            <img src="~/HinhAnh/quangcao_3.png" style="width: 1000px; height: 500px;">
+                        </div>
+                        <div class="item">
+                            <img src="~/HinhAnh/quangcao_4.jpg" style="width: 1000px; height: 500px;">
+                        </div>
+                    </div>
+                    <a class="left carousel-control" href="#mycarousel" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a>
+                    <a class="right carousel-control" href="#mycarousel" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <img src="~/HinhAnh/quangcao5.jpg" style="width: 80%; height: 250px;">
+                <img src="~/HinhAnh/quangcao_6.jpg" style="width: 80%; height: 250px;">
+            </div>
+        </div>
+        
+    </div>
+   <!--Thời trang nam-->
+  
+    <div class="container-fluid">
+        <h3 style = "color: brown;">Thời trang nam</h3>
+
+        <div class="row">
+            @{ var dem = 0;
+               foreach (My_Database.San_Pham items in Model)
+               {
+                   if (items.ID_Loai_San_Pham <= 4 && dem < 8)
+                   {
+                       dem++;
+                <div class="col-md-3">
+                    <div class="thumbnail" style="height: 350px;">
+                        <a href="javascript:SanPhamClick('@items.Ma_San_Pham','@items.Ten_San_Pham', '@items.Hinh_Anh','@items.Thong_Tin_San_Pham', '@items.Gia_tien')">
+                            <img src="@items.Hinh_Anh" style="height: 250px;">
+                            <div class="caption">
+                                <p>
+                                    @items.Ten_San_Pham
+                                </p>
+                                <p>
+                                    @{
+                                      System.Globalization.CultureInfo cul = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");   // try with "en-US"
+                                      string a = double.Parse(items.Gia_tien.ToString()).ToString("#,###", cul.NumberFormat);
+                                    }
+                                    Giá: @a đ
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                   }
+               }
+            }
+
+        </div>
+    </div>
+    
+    <!--Thời trang nữ-->
+    <div class="container-fluid">
+        <h3 style = "color: brown;">Thời trang nữ</h3>
+        <div class="row">
+            @{ var dem2 = 0;
+               foreach (My_Database.San_Pham items in Model)
+               {
+                   if (items.ID_Loai_San_Pham > 4 && items.ID_Loai_San_Pham < 9 && dem2 < 8)
+                   {
+                       dem2++;
+                <div class="col-md-3">
+                    <div class="thumbnail" style="height: 350px;">
+                        <a href="javascript:SanPhamClick('@items.Ma_San_Pham','@items.Ten_San_Pham', '@items.Hinh_Anh','@items.Thong_Tin_San_Pham','@items.Gia_tien')">
+                            <img src="@items.Hinh_Anh" style="height: 250px;">
+                            <div class="caption">
+                                <p>
+                                    @items.Ten_San_Pham
+                                </p>
+                                <p>
+                                    @{
+                                      System.Globalization.CultureInfo cul = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");   // try with "en-US"
+                                      string a = double.Parse(items.Gia_tien.ToString()).ToString("#,###", cul.NumberFormat);
+                                    }
+                                    Giá: @a đ
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                   }
+               }
+            }
+
+        </div>
+    </div>
+@*<style>
+    #thongbao {
+        color: #4cff00;
+        background-color: #f00;
+        display:none;
+    }
+</style>*@
+    <script>
+      
+        var ListItems = new Array();
+            $("#ic_dangki").click(function ()  
+            {
+                $("#FormDangKi").dialog(
+                {
+                    show: { effect: "blind", duration: 1000 },
+                    hide: { effect: "explode", duration: 1000 },
+                    width: 500,
+                    height:"auto",
+                    resizable: false,
+                    modal: true,
+                    buttons:
+                    {
+                        "Đăng kí": DangKi,
+                        "Trở về": function () { $(this).dialog("close"); }
+                    }
+                });
+
+            });
+            var check_dk = false;
+            function DangKi()
+            {
+                var name = $("#name_kh").val();
+                var email = $("#email_kh").val();
+                var phone = $("#phone").val();
+                var password = $("#password").val();
+                var repassword = $("#repassword").val();
+                var adress = $("#adress").val();
+                if (name == "" || email == "" || phone == "" || password == "" || repassword == "" || adress == "")
+                {
+                    $("#ThongBao").html("Bạn không được để trống ! Phải điền đầy đủ thông tin");
+                    $("#ThongBao").css("color", "#f00");
+                    return;
+                }
+                if (password != repassword)
+                {
+                    $("#ThongBao").html("Mật khẩu không trùng khớp ! Xin kiểm tra lại");
+                    $("#ThongBao").css("color", "#f00");
+                    return;
+                }
+                var data = new FormData();
+                data.append("name", name);
+                data.append("email", email);
+                data.append("phone", phone);
+                data.append("password", password);
+                data.append("adress", adress);
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "@Request.Url.Scheme://@Request.Url.Host:@Request.Url.Port/Home/SignIn", true);
+                xhr.onreadystatechange = function () {
+                    if (xhr.status == 200 && xhr.readyState == 4)
+                    {
+                        var data = xhr.responseText;
+                        var json = JSON.parse(data);
+                        if (json.Data.status == "OK")
+                        {
+                            check_dk = true;
+                            $("#ThongBao").html("Bạn đã đăng kí thành công ! Xin chúc mừng");
+                            $("#ThongBao").css("color", "#4cff00");
+                
+                            $("#ic_dangki").css("display", "none");
+                            $("#ic_dangnhap").html("<span class='glyphicon glyphicon-user'></span> \n chào bạn:" + json.Data.name);
+                      
+                        }
+                        if (json.Data.status == "exit")
+                        {
+                            $("#ThongBao").html("Địa chỉ Email của bạn đã được đăng kí ! Xin vui lòng nhập email khác");
+                            $("#ThongBao").css("color", "#f00");
+                        }
+                        $("#name_kh").val("");
+                        $("#email_kh").val("");
+                        $("#phone").val("");
+                        $("#password").val("");
+                        $("#repassword").val("");
+                        $("#adress").val("");
+                    }
+                };
+                xhr.send(data);
+            }
+            $("#ic_dangnhap").click(function () {
+                $("#FormDangNhap").dialog(
+                {
+                    show: { effect: "blind", duration: 1000 },
+                    hide: { effect: "explode", duration: 1000 },
+                    width: 500,
+                    height: 600,
+                    resizable: false,
+                    modal: true,
+                    buttons:
+                    {
+                        "Đăng nhập": DangNhap,
+                        "Trở về": function () { $(this).dialog("close"); }
+                    }
+                });
+            });
+            var name_kh = "";
+            var email_kh = "";
+            var sdt_kh = "";
+            var diachi_kh = "";
+            function DangNhap()
+            {
+                var email = $("#email_dn").val();
+                var password = $("#password_dn").val();
+                if (email == "" || password == "")
+                {
+                    $("#thongbao_dn").html("Bạn phải điền đầy đủ thông tin");
+                    $("#thongbao_dn").css("color", "red");
+                    return;
+                }
+                //  alert(email + "\n" + password);
+                var data = new FormData();
+                data.append("email", email);
+                data.append("password", password);
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "@Request.Url.Scheme://@Request.Url.Host:@Request.Url.Port/Home/Login", true);
+                xhr.onreadystatechange = function ()
+                {
+                    if (xhr.status == 200 && xhr.readyState == 4) {
+                        var dulieu = xhr.responseText;
+                        var json = JSON.parse(dulieu);
+                        if (json.Data.status == "OK") {
+                            name_kh = json.Data.name;
+                            email_kh = json.Data.email;
+                            sdt_kh = json.Data.phone;
+                            diachi_kh = json.Data.adress;
+                            $("#thongbao_dn").html("Đăng nhập thành công");
+                            $("#thongbao_dn").css("color", "green");
+                            $("#FormDangNhap").dialog("close");
+                            $("#ic_dangki").css("display", "none");
+                            $("#ic_dangnhap").html("<span class='glyphicon glyphicon-user'></span> \n chào bạn:" + json.Data.name);
+                        }
+                        else
+                        {
+                            $("#thongbao_dn").html("Mật khẩu hoặc địa chỉ email không đúng !");
+                            $("#thongbao_dn").css("color", "red");
+                        }
+                        $("#email_dn").val("");
+                        $("#password_dn").val("");
+                    }
+                }
+                
+                xhr.send(data);
+            }
+        function format2(n) {
+            return n.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+        }
+        var dem3 = 0;
+        function SanPhamClick(MaSp,TenSp, HinhAnhSp, ThongTinSp, GiaTienSp) {
+            //alert(TenSp + "\n" + HinhAnhSp + "\n" + ThongTinSp + "\n" + GiaTienSp);
+            //console.log(format2(GiaTienSp));
+            dem3++;
+            var money = format2(GiaTienSp);
+            var check = false;
+            $("#ImageSp").attr("src", HinhAnhSp);
+            $("#TenSanPham").html(TenSp);
+            $("#GiaSanPham").html("Giá: " + money + " VNĐ");
+            $("#ThongTinSp").html(ThongTinSp);
+            $("#FormSanPham input").val(1);
+            $("#FormSanPham input").attr("id", MaSp);
+            $("#ThongBaoSp").html("");
+            $("#FormSanPham").dialog(
+                {
+
+                    show: { effect: "blind", duration: 1000 },
+                    hide: { effect: "explode", duration: 1000 },
+                    title: TenSp,
+                    width: 600,
+                    height: 500,
+                    resizable: false,
+                    modal: true,
+                    close: function () {
+                        check = true;
+                    },
+                    buttons:
+                    {
+                        "Thêm vào giỏ hàng": ThemSanPham,
+                        "Trở về": function () { $(this).dialog("close"); }
+                    }
+                });
+            $("#sub").click(function () {
+               // alert(dem);
+                var cout = parseInt($("#" + MaSp  ).val());
+
+                if (cout > 1 && check == false) {
+                    cout--;
+                    $("#" + MaSp).val(cout);
+                    var money = format2(GiaTienSp * cout);
+                    $("#GiaSanPham").html("Giá: " + money + " VNĐ");
+                }
+            });
+            $("#add").click(function () {
+            
+                var cout = parseInt($("#" + MaSp).val());
+                //console.log(cout);
+                if (cout < 10 && check == false) {
+                    cout++;
+                    $("#" + MaSp).val(cout);
+                    var money = format2(GiaTienSp * cout);
+                    $("#GiaSanPham").html("Giá: " + money + " VNĐ");
+                }
+            });
+            function ThemSanPham()
+            {
+
+                $("#ThongBaoSp").html("Bạn đã thêm thành công sản phẩm vào giỏ hàng");
+                var SoLuong = parseInt($("#" + MaSp ).val());
+                var item = new ItemGioHang(MaSp, TenSp, SoLuong, GiaTienSp, ThongTinSp, HinhAnhSp);
+                var check = false;
+                for (var i = 0; i < ListItems.length; ++i) {
+                    if (ListItems[i].MaSp == MaSp) {
+                        ListItems[i].SoLuong += SoLuong;
+                        check = true;
+                        break;
+                    }
+                }
+                if (check == false) {
+                    ListItems.push(item);
+                }
+               
+            }
+        };
+        function ItemGioHang(MaSp, TenSp, SoLuong, GiaTien, ThongTin, HinhAnh)
+        {
+            this.MaSp = MaSp;
+            this.TenSp = TenSp;
+            this.SoLuong = SoLuong;
+            this.GiaTien = GiaTien;
+            this.ThongTin = ThongTin;
+            this.HinhAnh = HinhAnh;
+        }
+        function GioHang()
+        {
+            var TongTien = 0;
+            $("#GioHang").empty();
+            for (var i = 0; i < ListItems.length; ++i) {
+               
+    
+                    TongTien += (ListItems[i].GiaTien * ListItems[i].SoLuong);
+                    var str1 = "<div style='border: solid 2px #ff6a00; margin: 10px' id = 'item_"+ i +"'>";
+                    var str2 = "<div class='row' style='height:auto;'>";
+                    var str3 = "<div class='col-md-4'>";
+                    var str4 = "<img src='" + ListItems[i].HinhAnh + "' style=' display:block; width:120px; height:130px; margin:10px' />";
+                    var str5 = "</div>";
+
+                    var str6 = "<div class='col-md-8'>";
+                    var str7 = "<h3>" + ListItems[i].TenSp + "</h3>";
+                    var str8 = "<h4>" + format2(ListItems[i].GiaTien * ListItems[i].SoLuong) + " VNĐ" + "</h4>";
+                    var str12 = "<h4> Số Lượng: " + ListItems[i].SoLuong + "<h4>";
+                    var str9 = "<h5 style='overflow:hidden; text-overflow:ellipsis; white-space:nowrap'>" + ListItems[i].ThongTin + "</h5>";
+                    var str10 = "<button onclick = 'Delete(" + i + ")' type='button' class='btn btn-warning' id='delete' style='text-align: center; float:right'><span class='glyphicon glyphicon-remove'></span> Xóa </button>";
+                    var str11 = "</div> </div> </div>";
+                    var str = str1 + str2 + str3 + str4 + str5 + str6 + str7 + str8 + str12 + str9 + str10 + str11;
+                    $("#GioHang").append(str);
+          
+            }
+            var str12 = "<h3 style='color:red; font-weight:bold' id = 'Total'>Tổng Tiền: " + format2(TongTien) + " VNĐ</h3>";
+            $("#GioHang").prepend(str12);
+            $("#GioHang").dialog(
+                {
+                    show: { effect: "blind", duration: 1000 },
+                    hide: { effect: "explode", duration: 1000 },
+                    width: 800,
+                    height: 600,
+                    resizable: false,
+                    modal: true,
+                    buttons:
+                    {
+                        "Thanh toán giỏ hàng": ThanhToan,
+                        "Trở về": function () { $(this).dialog("close"); }
+                    }
+                });
+           
+        }
+        function Delete(i)
+        {
+            $("#item_" + i).empty();
+            ListItems.splice(i, 1);
+            var TongTien = 0;
+            for (var i = 0; i < ListItems.length; ++i) {
+                TongTien += (ListItems[i].GiaTien * ListItems[i].SoLuong);
+
+            }
+            $("#Total").html("Tổng Tiền: " + format2(TongTien) + " VNĐ");
+        }
+        function ThanhToan()
+        {
+            if (ListItems.length == 0)
+            {
+                return;
+            }
+            
+            $("#GioHang").dialog("close");
+            var session = '<%=Session["username"] != null%>';
+            if (session == true) {
+              //  alert("phong");
+                $("#name_tt").val(name_kh);
+                $("#email_tt").val(email_kh);
+                $("#phone_tt").val(sdt_kh);
+                $("#adress_tt").val(diachi_kh);
+            }
+            else
+            {
+               // alert("phong vo van");
+                setTimeout(function () {
+                    $("#FormDangKi").dialog(
+                       {
+                           show: { effect: "blind", duration: 1000 },
+                           hide: { effect: "explode", duration: 1000 },
+                           width: 500,
+                           height: 500,
+                           resizable: false,
+                           modal: true,
+                           buttons:
+                           {
+                               "Xác Nhận": DangKi,
+                               "Hủy": function () { $(this).dialog("close"); }
+                           }
+                       })
+                }, 1000);
+                
+            }
+            if (check_dk == true || session == true) {
+                setTimeout(function () {
+                    $("#FormThongTin").dialog(
+                   {
+                       show: { effect: "blind", duration: 1000 },
+                       hide: { effect: "explode", duration: 1000 },
+                       width: 500,
+                       height: 500,
+                       resizable: false,
+                       modal: true,
+                       buttons:
+                       {
+                           "Xác Nhận": XacNhan,
+                           "Hủy": function () { $(this).dialog("close"); }
+                       }
+                   })
+                }, 1000);
+            }
+
+            
+        }
+        function XacNhan()
+        {
+            var data = new FormData();
+            data.append();
+        }
+        
+    </script>

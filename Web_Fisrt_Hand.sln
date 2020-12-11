@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop_Phong_Star", "Shop_Phong_Star\Shop_Phong_Star.csproj", "{80FC6491-B90E-412E-90D7-D0768B589CA6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My_Database", "My_Database\My_Database.csproj", "{B6B9DFF6-27AB-48D5-89B7-3CFED0393418}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My_Provider", "My_Provider\My_Provider.csproj", "{50370C6D-667B-49FB-994E-F1626F7B9E12}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{80FC6491-B90E-412E-90D7-D0768B589CA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80FC6491-B90E-412E-90D7-D0768B589CA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80FC6491-B90E-412E-90D7-D0768B589CA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80FC6491-B90E-412E-90D7-D0768B589CA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6B9DFF6-27AB-48D5-89B7-3CFED0393418}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6B9DFF6-27AB-48D5-89B7-3CFED0393418}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6B9DFF6-27AB-48D5-89B7-3CFED0393418}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6B9DFF6-27AB-48D5-89B7-3CFED0393418}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50370C6D-667B-49FB-994E-F1626F7B9E12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50370C6D-667B-49FB-994E-F1626F7B9E12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50370C6D-667B-49FB-994E-F1626F7B9E12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50370C6D-667B-49FB-994E-F1626F7B9E12}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

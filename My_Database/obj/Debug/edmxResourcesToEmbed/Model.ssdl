@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Shop_Phong_Start.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="Shop_Phong_StartStoreContainer">
+    <EntitySet Name="Loai_San_Pham" EntityType="Shop_Phong_Start.Store.Loai_San_Pham" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="San_Pham" EntityType="Shop_Phong_Start.Store.San_Pham" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ThongTinKhachHang" EntityType="Shop_Phong_Start.Store.ThongTinKhachHang" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="key1" Association="Shop_Phong_Start.Store.key1">
+      <End Role="Loai_San_Pham" EntitySet="Loai_San_Pham" />
+      <End Role="San_Pham" EntitySet="San_Pham" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Loai_San_Pham">
+    <Key>
+      <PropertyRef Name="ID_Loai_San_Pham" />
+    </Key>
+    <Property Name="ID_Loai_San_Pham" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Ten_Loai_San_Pham" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="San_Pham">
+    <Key>
+      <PropertyRef Name="Ma_San_Pham" />
+    </Key>
+    <Property Name="Ma_San_Pham" Type="int" Nullable="false" />
+    <Property Name="ID_Loai_San_Pham" Type="int" />
+    <Property Name="Ten_San_Pham" Type="nvarchar" MaxLength="50" />
+    <Property Name="Hinh_Anh" Type="varchar" MaxLength="100" />
+    <Property Name="Thong_Tin_San_Pham" Type="nvarchar" MaxLength="150" />
+    <Property Name="Gia_tien" Type="float" />
+  </EntityType>
+  <EntityType Name="ThongTinKhachHang">
+    <Key>
+      <PropertyRef Name="Ma_Khach_Hang" />
+    </Key>
+    <Property Name="Ma_Khach_Hang" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Ten_Khanh_Hang" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="Phone" Type="varchar" MaxLength="20" />
+    <Property Name="Password" Type="varchar" MaxLength="50" />
+    <Property Name="Adress" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="key1">
+    <End Role="Loai_San_Pham" Type="Shop_Phong_Start.Store.Loai_San_Pham" Multiplicity="0..1" />
+    <End Role="San_Pham" Type="Shop_Phong_Start.Store.San_Pham" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Loai_San_Pham">
+        <PropertyRef Name="ID_Loai_San_Pham" />
+      </Principal>
+      <Dependent Role="San_Pham">
+        <PropertyRef Name="ID_Loai_San_Pham" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <!--Errors Found During Generation:
+      warning 6013: The table/view 'Shop_Phong_Start.dbo.Don_Hang' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+      
+      <EntityType Name="Don_Hang">
+        <Property Name="Ma_khach_hang" Type="int" />
+        <Property Name="Ma_San_Pham" Type="int" />
+        <Property Name="Dia_chi_Giao_Hang" Type="nvarchar" MaxLength="50" />
+        <Property Name="Phone" Type="varchar" MaxLength="20" />
+        <Property Name="So_Luong" Type="int" />
+      </EntityType>-->
+</Schema>
